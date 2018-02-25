@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:layout_weight="8"
+        android:background="#f2f2f2"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Attendence History"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/select_month"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/calender"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#a4a4a4" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="start"
+                android:layout_height="wrap_content"
+                android:text="DATE"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="start"
+                android:layout_height="wrap_content"
+                android:text="IN-TIME"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="start"
+                android:layout_height="wrap_content"
+                android:text="OUT-TIME"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="ATTENDENCE"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_for_attendence"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/attendence_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="100dp"
+        android:padding="2dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/day_presents"
+            android:layout_marginTop="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textSize="10dp"
+            android:text="Present 10 days"/>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/progress_present"
+                android:layout_height="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="12"
+                app:rcBackgroundPadding="0dp"
+                app:rcProgress="13.00"
+                app:rcSecondaryProgress="0.0"
+                app:rcMax="25.0"
+                app:rcRadius="1dp"
+                app:rcReverse="false"
+                app:rcProgressColor="#02a44e"
+                app:rcSecondaryProgressColor="#c61010"
+                app:rcBackgroundColor="#60baff" />
+            <TextView
+                android:id="@+id/presence_in_percentage"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="10dp"
+                android:text="25%"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/day_absent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textSize="10dp"
+            android:text="Absent 25 days"/>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:layout_marginLeft="0dp"
+                android:id="@+id/progress_absent"
+                android:layout_height="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="12"
+                app:rcBackgroundPadding="0dp"
+                app:rcProgress="12.00"
+                app:rcSecondaryProgress="0.0"
+                app:rcMax="25.0"
+                app:rcRadius="1dp"
+                app:rcReverse="false"
+                app:rcProgressColor="#e9011c"
+                app:rcSecondaryProgressColor="#c61010"
+                app:rcBackgroundColor="#fa6675" />
+            <TextView
+                android:id="@+id/absent_in_percentage"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="10dp"
+                android:text="10%"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

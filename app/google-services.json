@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "460636603859",
+    "firebase_url": "https://biddaloy-efef1.firebaseio.com",
+    "project_id": "biddaloy-efef1",
+    "storage_bucket": "biddaloy-efef1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460636603859:android:a0e8174e30db5ac6",
+        "android_client_info": {
+          "package_name": "com.dgpro.biddaloy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460636603859-3l7rnqmlq62373hqn3kdlc113bhg54mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1IXXwlaPuypvYO5hZaY7XogHIU8zBytw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

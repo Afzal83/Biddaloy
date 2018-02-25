@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/grp0" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/drawer_home_icon"
+            android:title="Home" />
+    </group>
+    <group android:id="@+id/grp1" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_student"
+            android:icon="@drawable/drawer_student_icon"
+            android:title="Student" />
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_notice"
+            android:icon="@drawable/contextual_attendance_icon"
+            android:title="Notice" />
+    </group>
+    <group android:id="@+id/grp3" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/drawer_message_icon"
+            android:title="Message" />
+    </group>
+    <group android:id="@+id/grp4" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_blog"
+            android:icon="@drawable/drawer_blog_icon"
+            android:title="Blog" />
+    </group>
+
+    <group android:id="@+id/grp5" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_biddaloy"
+            android:icon="@drawable/drawer_aboutus_icon"
+            android:title="About Us" />
+    </group>
+
+    <group android:id="@+id/grp6" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/drawer_settings_icon"
+            android:title="Settings" />
+    </group>
+    <group android:id="@+id/grp7" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/drawer_signout_icon"
+            android:title="Logout" />
+    </group>
+
+
+
+</menu>

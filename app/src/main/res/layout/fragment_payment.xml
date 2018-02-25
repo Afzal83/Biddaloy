@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Due : "
+            android:textSize="35dp"
+            android:textColor="#9f0606"/>
+        <TextView
+            android:id="@+id/total_due"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="400 taka"
+            android:textSize="35dp"
+            android:textColor="#9f0606"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_for_payment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:scrollbars="vertical" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center">
+        <Button
+            android:id="@+id/create_payment"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Create Payment"
+            android:textSize="20dp"
+            android:textAllCaps="false"
+            android:background="@color/mitu"/>
+    </LinearLayout>
+</LinearLayout>
