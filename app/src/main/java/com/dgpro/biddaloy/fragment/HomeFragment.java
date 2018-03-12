@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
 import com.dgpro.biddaloy.Network.Model.AboutInstituteModel;
 import com.dgpro.biddaloy.Network.Model.BlogListModel;
@@ -59,8 +60,11 @@ public class HomeFragment extends Fragment {
         return mView;
     }
     void downLoadInstituteInfo(){
-        final android.app.AlertDialog dialog = new SpotsDialog(getActivity());
-        dialog.show();
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(getResources().getString(R.string.loading))
+                .content(getResources().getString(R.string.pleaseWait))
+                .progress(true, 0)
+                .show();
         instituteApi.downLoadInstituteInfo(new InstituteApi.Callback<AboutInstituteModel>() {
             @Override
             public void onSuccess(AboutInstituteModel aboutInstituteModel) {

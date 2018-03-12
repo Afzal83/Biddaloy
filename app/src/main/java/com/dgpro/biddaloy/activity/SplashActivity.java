@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dgpro.biddaloy.Network.Model.AboutInstituteModel;
 import com.dgpro.biddaloy.application.BiddaloyApplication;
 import com.dgpro.biddaloy.Helper.Constants;
@@ -55,8 +56,12 @@ public class SplashActivity extends AppCompatActivity {
 
     }
     void downLoadSchoolInfo(){
-        final android.app.AlertDialog dialog = new SpotsDialog(this);
-        dialog.show();
+
+        final MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(getResources().getString(R.string.loading))
+                .content(getResources().getString(R.string.pleaseWait))
+                .progress(true, 0)
+                .show();
 
         instituteApi.downLoadInstituteInfo(new InstituteApi.Callback<AboutInstituteModel>() {
             @Override
@@ -102,7 +107,6 @@ public class SplashActivity extends AppCompatActivity {
                         gotoNavigationActivity();
                     }
                 });
-
             }else{
                 Log.e("fcm_splash","token is empty");
                 gotoNavigationActivity();

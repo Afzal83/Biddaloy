@@ -3,9 +3,11 @@ package com.dgpro.biddaloy.fragment.Message;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dgpro.biddaloy.Helper.Constants;
 import com.dgpro.biddaloy.activity.ComposeMessage;
 import com.dgpro.biddaloy.adapter.InboxAdapter;
@@ -37,7 +40,7 @@ import dmax.dialog.SpotsDialog;
  * Created by Babu on 1/16/2018.
  */
 
-public class InboxFragment extends Fragment implements CallFromMessageList{
+public class InboxFragment extends Fragment implements CallFromMessageList,SwipeRefreshLayout.OnRefreshListener{
     MessageApi messageApi;
 
     View mView ;
@@ -46,6 +49,7 @@ public class InboxFragment extends Fragment implements CallFromMessageList{
     List<InboxDataModel> mList;
 
     BiddaloyApplication biddaloyApplication;
+    SwipeRefreshLayout swipeLayout;
 
     @Nullable
     @Override
@@ -54,6 +58,13 @@ public class InboxFragment extends Fragment implements CallFromMessageList{
         biddaloyApplication = ((BiddaloyApplication)getActivity().getApplicationContext());
         messageApi = new MessageApi(getActivity());
 
+        swipeLayout = (SwipeRefreshLayout)mView.findViewById(R.id.inbox_swipe_container);
+        swipeLayout.setOnRefreshListener(this);
+//        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
+
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab_compose_mail);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,15 +72,28 @@ public class InboxFragment extends Fragment implements CallFromMessageList{
                 startActivity(new Intent(getActivity(),ComposeMessage.class));
             }
         });
-
         downLoadInboxMail();
         return mView;
     }
 
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                downLoadInboxMail();
+            }
+        }, 2000);
+    }
+
     void downLoadInboxMail(){
 
-        final AlertDialog dialog = new SpotsDialog(getActivity());
-        dialog.show();
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(getResources().getString(R.string.loading))
+                .content(getResources().getString(R.string.pleaseWait))
+                .progress(true, 0)
+                .show();
+
         messageApi.getInboxMailFromNetwork(new MessageApi.Callback<List<InboxDataModel>>() {
             @Override
             public void onSuccess(List<InboxDataModel> inboxDataModels) {
@@ -85,6 +109,9 @@ public class InboxFragment extends Fragment implements CallFromMessageList{
                 Log.e("error","did not got inbox data");
             }
         });
+    }
+    void refreshInboxMail(){
+
     }
     void setInboxListView(){
 

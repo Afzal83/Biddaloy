@@ -2,6 +2,7 @@ package com.dgpro.biddaloy.activity;
 
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,7 +54,7 @@ public class StudentActivity extends BaseStudentActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_student_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Back");
+        getSupportActionBar().setTitle(biddaloyApplication.studentName);
 
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -71,12 +74,10 @@ public class StudentActivity extends BaseStudentActivity {
         return super.onOptionsItemSelected(item);
     }
     void bindView(){
-        ImageView img = (ImageView)findViewById(R.id.student_image) ;
-        TextView studentName = (TextView)findViewById(R.id.name_of_std) ;
+        CircleImageView img = (CircleImageView)findViewById(R.id.student_image) ;
         TextView studentId = (TextView)findViewById(R.id.roll) ;
         TextView studentClass = (TextView)findViewById(R.id.std_class) ;
 
-        studentName.setText(biddaloyApplication.studentName);
         studentId.setText(biddaloyApplication.studentRoll);
         studentClass.setText(biddaloyApplication.stuedentClass);
 
@@ -151,6 +152,7 @@ public class StudentActivity extends BaseStudentActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) findViewById(R.id.students_tab_menu);
         tabLayout.setupWithViewPager(viewPager);
+        wrapTabIndicatorToTitle(tabLayout,0,0);
     }
 
     @Override
@@ -165,4 +167,46 @@ public class StudentActivity extends BaseStudentActivity {
         clearMemory();
         finish();
     }
+
+    public void wrapTabIndicatorToTitle(TabLayout tabLayout, int externalMargin, int internalMargin) {
+        View tabStrip = tabLayout.getChildAt(0);
+        if (tabStrip instanceof ViewGroup) {
+            ViewGroup tabStripGroup = (ViewGroup) tabStrip;
+            int childCount = ((ViewGroup) tabStrip).getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View tabView = tabStripGroup.getChildAt(i);
+                //set minimum width to 0 for instead for small texts, indicator is not wrapped as expected
+                tabView.setMinimumWidth(0);
+                // set padding to 0 for wrapping indicator as title
+                tabView.setPadding(0, tabView.getPaddingTop(), 0, tabView.getPaddingBottom());
+                // setting custom margin between tabs
+                if (tabView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                    ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) tabView.getLayoutParams();
+                    if (i == 0) {
+                        // left
+                        settingMargin(layoutParams, externalMargin, internalMargin);
+                    } else if (i == childCount - 1) {
+                        // right
+                        settingMargin(layoutParams, internalMargin, externalMargin);
+                    } else {
+                        // internal
+                        settingMargin(layoutParams, internalMargin, internalMargin);
+                    }
+                }
+            }
+
+            tabLayout.requestLayout();
+        }
+    }
+
+    private void settingMargin(ViewGroup.MarginLayoutParams layoutParams, int start, int end) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            layoutParams.setMarginStart(start);
+            layoutParams.setMarginEnd(end);
+        } else {
+            layoutParams.leftMargin = start;
+            layoutParams.rightMargin = end;
+        }
+    }
+
 }

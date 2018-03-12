@@ -20,9 +20,10 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:layout_centerHorizontal="true"
-            android:text="asdfasdf asdfasdf asdf"/>
+            android:singleLine="true"
+            android:text=" asdf"/>
         <TextView
             android:id="@+id/school_address"
             android:layout_toEndOf="@id/school_image"
@@ -33,7 +34,7 @@
             android:layout_marginEnd="5dp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:layout_centerHorizontal="true"/>
         <TextView
             android:id="@+id/school_phone"
@@ -73,7 +74,7 @@
                 android:id="@+id/head_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"/>
-            <TextView
+             <TextView
                 android:id="@+id/about_school"
                 android:layout_below="@id/head_image"
                 android:layout_width="match_parent"

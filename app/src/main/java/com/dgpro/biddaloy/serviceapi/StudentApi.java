@@ -100,9 +100,11 @@ public class StudentApi {
             @Override
             public void onResponse(Call<AttendenceModel> call, Response<AttendenceModel> response) {
                 if(response.isSuccessful()) {
-                    callback.onSuccess(response.body().getAttendance());
+
                     biddaloyApplication.studentPresentDay = response.body().getPresent();
                     biddaloyApplication.studentAbsentDay = response.body().getAbsence();
+                    callback.onSuccess(response.body().getAttendance());
+
                 }else {
                     int statusCode  = response.code();
                     callback.onError("Error");

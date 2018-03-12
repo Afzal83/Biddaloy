@@ -11,7 +11,7 @@
         android:gravity="start"
         android:layout_height="wrap_content"
         android:text="DATE"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -21,7 +21,7 @@
         android:gravity="start"
         android:layout_height="wrap_content"
         android:text="IN-TIME"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -31,7 +31,7 @@
         android:gravity="start"
         android:layout_height="wrap_content"
         android:text="OUT-TIME"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -41,6 +41,6 @@
         android:gravity="start"
         android:layout_height="wrap_content"
         android:text="ATTENDENCE"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:textStyle="bold" />
 </LinearLayout>

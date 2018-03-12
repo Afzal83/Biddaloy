@@ -1,20 +1,17 @@
 package com.dgpro.biddaloy.serviceapi;
 
 import android.content.Context;
-import android.util.Log;
+
 
 import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
-import com.dgpro.biddaloy.Network.Model.AboutUsModel;
 import com.dgpro.biddaloy.Network.Model.BlogDataModel;
 import com.dgpro.biddaloy.Network.Model.BlogListModel;
-import com.dgpro.biddaloy.Network.Remot.AnotherRetroService;
 import com.dgpro.biddaloy.Network.Remot.RetroService;
 import com.dgpro.biddaloy.application.BiddaloyApplication;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**

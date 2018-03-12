@@ -57,8 +57,8 @@ public class NoticeFragment extends BaseFragment {
     void downLoadNoticeData(){
 
         final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                .title("Loading ...")
-                .content("Please Wait")
+                .title(getResources().getString(R.string.loading))
+                .content(getResources().getString(R.string.pleaseWait))
                 .progress(true, 0)
                 .show();
 

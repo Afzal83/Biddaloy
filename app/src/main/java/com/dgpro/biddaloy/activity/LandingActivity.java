@@ -43,6 +43,12 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
+//        if (getIntent().getExtras() != null) {
+//            Intent intent = new Intent(this,FcmActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+
         biddaloyApplication = ((BiddaloyApplication) this.getApplicationContext());
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 

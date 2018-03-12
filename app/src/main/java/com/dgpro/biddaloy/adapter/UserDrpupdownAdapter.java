@@ -1,4 +1,4 @@
-package com.dgpro.biddaloy.customview.adapter;
+package com.dgpro.biddaloy.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,25 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.dgpro.biddaloy.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Babu on 2/2/2018.
+ * Created by Babu on 2/27/2018.
  */
 
-public class DroupDownAdapter extends ArrayAdapter<String> {
+public class UserDrpupdownAdapter  extends  ArrayAdapter<String>{
 
     private final LayoutInflater mInflater;
-    private ArrayList<String> mValues;
+    private List<String> mValues;
     private Context mContext;
     int resourceId ;
 
-    public DroupDownAdapter(Context context, int resourceId, ArrayList<String> values) {
+    public UserDrpupdownAdapter(Context context, int resourceId,List<String> values) {
         super(context, resourceId, values);
         mValues = values;
         mContext = context;
@@ -51,8 +51,8 @@ public class DroupDownAdapter extends ArrayAdapter<String> {
 
         itemText.setText(mValues.get(position));
         if(position == 0){
-            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green));
-            itemText.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.dorupdown_header_color));
+            itemText.setTextColor(ContextCompat.getColor(getContext(), R.color.dorupdown_header_text_color));
         }else{
 
         }

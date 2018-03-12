@@ -14,6 +14,7 @@
         android:layout_weight="8"
         android:background="#f2f2f2"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -54,7 +55,7 @@
                 android:gravity="start"
                 android:layout_height="wrap_content"
                 android:text="DATE"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -64,7 +65,7 @@
                 android:gravity="start"
                 android:layout_height="wrap_content"
                 android:text="IN-TIME"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -74,7 +75,7 @@
                 android:gravity="start"
                 android:layout_height="wrap_content"
                 android:text="OUT-TIME"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -84,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:text="ATTENDENCE"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 android:textStyle="bold" />
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
@@ -99,24 +100,27 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:padding="5dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:padding="2dp"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center_horizontal">
         <TextView
             android:id="@+id/day_presents"
             android:layout_marginTop="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Present 12 days"/>
+            android:layout_gravity="start"
+            android:textSize="10dp"
+            android:text="Present 10 days"/>
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:id="@+id/progress_present"
-                android:layout_height="15dp"
+                android:layout_height="10dp"
                 android:layout_width="0dp"
                 android:layout_weight="12"
                 app:rcBackgroundPadding="0dp"
@@ -130,16 +134,14 @@
                 app:rcBackgroundColor="#60baff" />
             <TextView
                 android:id="@+id/presence_in_percentage"
-                android:gravity="center"
+                android:gravity="start"
+                android:layout_marginStart="5dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
-                android:layout_marginStart="5dp"
-                android:singleLine="true"
-                android:textSize="15dp"
+                android:textSize="10dp"
                 android:text="25%"/>
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/day_absent"
@@ -147,6 +149,8 @@
             android:layout_marginLeft="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textSize="10dp"
             android:text="Absent 25 days"/>
 
         <LinearLayout android:layout_width="match_parent"
@@ -156,7 +160,7 @@
             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:layout_marginLeft="0dp"
                 android:id="@+id/progress_absent"
-                android:layout_height="15dp"
+                android:layout_height="10dp"
                 android:layout_width="0dp"
                 android:layout_weight="12"
                 app:rcBackgroundPadding="0dp"
@@ -170,12 +174,12 @@
                 app:rcBackgroundColor="#fa6675" />
             <TextView
                 android:id="@+id/absent_in_percentage"
-                android:gravity="center"
+                android:gravity="start"
+                android:layout_marginStart="5dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
-                android:layout_marginStart="5dp"
-                android:textSize="15dp"
+                android:textSize="10dp"
                 android:text="10%"/>
         </LinearLayout>
     </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dgpro.biddaloy.Model.NewMessageModel;
 import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
 import com.dgpro.biddaloy.Network.Model.InboxDataModel;
@@ -143,14 +144,18 @@ public class ComposeMessage extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        final android.app.AlertDialog dialog = new SpotsDialog(this);
-        dialog.show();
+        final MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("Sending ....")
+                .content("Please Wait")
+                .progress(true, 0)
+                .show();
 
         messageApi.submitMail(newMessageModel, new MessageApi.Callback<String>() {
             @Override
             public void onSuccess(String s) {
                 dialog.dismiss();
                 transientDialog.showTransientDialogWithOutAction("Success...","Message sent Successfully..");
+                ComposeMessage.this.finish();
             }
 
             @Override

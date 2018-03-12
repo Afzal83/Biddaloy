@@ -4,105 +4,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="?attr/colorPrimary">
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/toolbar_container"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:elevation="0dp">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/my_student_toolbar"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/toolbar_container"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:elevation="0dp">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/my_student_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        </android.support.design.widget.AppBarLayout>
-         <RelativeLayout
-             android:id="@+id/student_info"
-             android:layout_below="@id/toolbar_container"
-             android:layout_centerVertical="true"
-             android:layout_width="260dp"
-             android:layout_height="match_parent"
-             android:padding="10dp"
-             android:gravity="center">
-            <TextView
-                android:id="@+id/name_of_std"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:textColor="@color/white"
-                android:text="Md. Jhon Abrahem"/>
-            <TextView
-                android:id="@+id/roll_he"
-                android:layout_below="@id/name_of_std"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:text="Roll : "/>
-            <TextView
-                android:id="@+id/roll"
-                android:layout_below="@id/name_of_std"
-                android:layout_toEndOf="@id/roll_he"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:text="050105089 "/>
-            <TextView
-                android:id="@+id/class_h"
-                android:layout_below="@id/roll_he"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:text="Class :  "/>
-            <TextView
-                android:id="@+id/std_class"
-                android:layout_below="@id/roll_he"
-                android:layout_toEndOf="@id/class_h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:text=" IV "/>
-       </RelativeLayout>
-        <RelativeLayout
+            </android.support.design.widget.AppBarLayout>
+            <RelativeLayout
+                android:id="@+id/student_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/roll_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"
+                    android:text="Id : "/>
+                <TextView
+                    android:id="@+id/roll"
+                    android:layout_toEndOf="@id/roll_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"
+                    android:text="050105089 "/>
+                <TextView
+                    android:id="@+id/class_h"
+                    android:layout_below="@id/roll_he"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"
+                    android:text="Class :  "/>
+                <TextView
+                    android:id="@+id/std_class"
+                    android:layout_below="@id/roll_he"
+                    android:layout_toEndOf="@id/class_h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"
+                    android:text=" IV "/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="4">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/student_image"
+                android:layout_centerInParent="true"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/child_head_icon"
+                app:civ_border_width="0dp"
+                app:civ_border_color="#00000000"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
+        <android.support.design.widget.TabLayout
+            android:id="@+id/students_tab_menu"
+            app:tabTextAppearance="@style/TabLayoutStyle"
+            android:background="@color/colorPrimary"
+            app:tabTextColor="@color/white"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="#990000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabPaddingStart="0dp"
+            app:tabPaddingEnd="0dp"
+            app:tabIndicatorHeight="5dp"
+            app:tabMode="fixed"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/student_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@id/student_info"
-            android:layout_alignParentEnd="true">
-            <ImageView
-                android:id="@+id/student_image"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/child_head_icon"/>
-        </RelativeLayout>
-
-    </RelativeLayout>
-    <android.support.design.widget.TabLayout
-        android:id="@+id/students_tab_menu"
-        app:tabTextAppearance="@style/TabLayoutStyle"
-        android:background="#d9332a"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
-        app:tabIndicatorColor="#990000"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabIndicatorHeight="5dp"
-        app:tabMode="fixed"/>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/student_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
 </LinearLayout>

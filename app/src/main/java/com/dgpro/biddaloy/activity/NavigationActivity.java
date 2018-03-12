@@ -33,6 +33,7 @@ import com.dgpro.biddaloy.fragment.Message.MessageFragment;
 import com.dgpro.biddaloy.fragment.MyStudents.MyStudentFragment;
 import com.dgpro.biddaloy.fragment.NoticeFragment;
 import com.dgpro.biddaloy.fragment.BlogFragment;
+import com.dgpro.biddaloy.fragment.ProfileFragment;
 import com.dgpro.biddaloy.fragment.settings.SettingsFragment;
 import com.dgpro.biddaloy.serviceapi.UserApi;
 
@@ -76,7 +77,24 @@ public class NavigationActivity extends AppCompatActivity
         // Display the saved image to ImageView
         imgvw.setImageURI(savedImageURI);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.item_container,new HomeFragment()).commit();
+
+        String fr = getIntent().getStringExtra("res_fr");
+
+        if(null == fr){
+            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new HomeFragment()).commit();
+        }
+        else if(fr.contains("notice")){
+            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new NoticeFragment()).commit();
+        }
+        else if(fr.contains("message")){
+            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new MessageFragment()).commit();
+        }
+        else if(fr.contains("blog")){
+            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new BlogFragment()).commit();
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new HomeFragment()).commit();
+        }
 
 
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -110,8 +128,6 @@ public class NavigationActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -153,7 +169,10 @@ public class NavigationActivity extends AppCompatActivity
             replaceFragment(new SettingsFragment());
             setTitle ("Settings");
         }
-
+        else if (id == R.id.nav_profile) {
+            replaceFragment(new ProfileFragment());
+            setTitle ("Profile");
+        }
         else if (id == R.id.nav_logout) {
 
             new UserApi(this).insertLoginModelToSharePreference(getBaseContext(),new LoginModel());

@@ -28,14 +28,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
 import com.dgpro.biddaloy.Network.Model.BlogCatagoryDataModel;
 import com.dgpro.biddaloy.Network.Model.BlogCatagoryList;
 import com.dgpro.biddaloy.Network.Model.SubmitBlogResponseModel;
 import com.dgpro.biddaloy.Network.Remot.RetroService;
 import com.dgpro.biddaloy.R;
+import com.dgpro.biddaloy.adapter.UserDrpupdownAdapter;
 import com.dgpro.biddaloy.application.BiddaloyApplication;
-import com.dgpro.biddaloy.customview.adapter.DroupDownAdapter;
 import com.dgpro.biddaloy.dialog.TransientDialog;
 import com.squareup.picasso.Picasso;
 
@@ -117,13 +118,17 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
 
     void downLoadBlogCagagoryData(){
         RetroService mService = ApiUtils.getLoginDataService(biddaloyApplication.baseUrl);
-        mService.getBlogCatagories("Ashraful","123","guardian").enqueue(new Callback<BlogCatagoryList>() {
+        mService.getBlogCatagories(
+                biddaloyApplication.userName
+                ,biddaloyApplication.password
+                ,biddaloyApplication.userCatagory
+        ).enqueue(new Callback<BlogCatagoryList>() {
 
             @Override
             public void onResponse(Call<BlogCatagoryList> call, Response<BlogCatagoryList> response) {
                 if (response.isSuccessful()) {
                     droupDownList = new ArrayList<>();
-                    droupDownList.add("");
+                    droupDownList.add("Select Category");
                     for (BlogCatagoryDataModel model : response.body().getBlog_category()) {
                         droupDownList.add(model.getBlog_category());
                     }
@@ -142,15 +147,17 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
     void setBlogCatagoryDropDown(){
 
         mDroupDownSpinner = (Spinner) findViewById(R.id.blog_catagory_spinner);
-        ArrayAdapter spinnerAdapter = new ArrayAdapter(this,R.layout.spinner_row_blog_category,droupDownList);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       // DroupDownAdapter mAdapter = new DroupDownAdapter(this,android.R.layout.simple_spinner_dropdown_item,droupDownList);
-        mDroupDownSpinner.setAdapter(spinnerAdapter);
-
+        UserDrpupdownAdapter aa = new UserDrpupdownAdapter(this,R.layout.droupdown_blog_catagory,droupDownList);
+        mDroupDownSpinner.setAdapter(aa);
         mDroupDownSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 blogCatagory =  droupDownList.get(i);
+                if(blogCatagory.contains("Select")){
+                    blogCatagory = "";
+                    return;
+                }
                 Log.e("selected catagory ",blogCatagory);
             }
             @Override
@@ -167,6 +174,7 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
                 pickImage();
                 break;
             case R.id.discard_img_btn:
+                imageAbsolutePath = "";
                 blogImage_iv.setVisibility(View.GONE);
                 discardImage.setVisibility(View.GONE);
                 break;
@@ -195,15 +203,23 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
             return ;
         }
 
-        File file = new File(imageAbsolutePath);
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+//        File file = new File(imageAbsolutePath);
+//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-        Log.e("multipartBody :",body.toString());
+        File file ;
+        RequestBody requestFile;
+        MultipartBody.Part body = null;
+        if(!imageAbsolutePath.contentEquals("")){
+            file = new File(imageAbsolutePath);
+            requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        }
+        //Log.e("multipartBody :",body.toString());
 
-        RequestBody userName = RequestBody.create(MediaType.parse("text/plain"), "Ashraful");
-        RequestBody userPass = RequestBody.create(MediaType.parse("text/plain"), "123");
-        RequestBody userCategory = RequestBody.create(MediaType.parse("text/plain"),"guardian");
+        RequestBody userName = RequestBody.create(MediaType.parse("text/plain"), biddaloyApplication.userName);
+        RequestBody userPass = RequestBody.create(MediaType.parse("text/plain"), biddaloyApplication.password);
+        RequestBody userCategory = RequestBody.create(MediaType.parse("text/plain"),biddaloyApplication.userCatagory);
         RequestBody blgCatagory = RequestBody.create(MediaType.parse("text/plain"),blogCatagory);
         RequestBody blgTitle = RequestBody.create(MediaType.parse("text/plain"),blogTitle);
         RequestBody blgBody = RequestBody.create(MediaType.parse("text/plain"),blogBody);
@@ -216,9 +232,11 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
         Log.e("blockBody :",blgBody+"");
 
 
-        final AlertDialog dialog = new SpotsDialog(this);
-        dialog.show();
-
+        final MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("Uploading Blog.....")
+                .content("Please Wait")
+                .progress(true, 0)
+                .show();
 
         RetroService mService = ApiUtils.getLoginDataService(biddaloyApplication.baseUrl);
         Call<SubmitBlogResponseModel> call = mService.submitBlog( userName, userPass, userCategory,
@@ -237,7 +255,7 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
                     Log.e("send blog","fucked up ..");
                     dialog.dismiss();
                     new TransientDialog(ComposeBlogActivity.this)
-                            .showTransientDialogWithOutAction("Error ...","Could Not Submit Blog ");
+                            .showTransientDialogWithOutAction("Error ...","Blog submit fail  ");
                 }
             }
 
@@ -260,6 +278,7 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         21);
 
+                Log.e("pick image","not permitted");
         }else{
             uploadImage();
         }
@@ -308,6 +327,7 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
                 blogImage_iv.setImageBitmap(bmp);
             }
         }else {
+
             if (requestCode == SELECT_PICTURE){
                 discardImage.setVisibility(View.GONE);
                 blogImage_iv.setVisibility(View.GONE);

@@ -160,15 +160,6 @@ public interface RetroService {
                                              @Part("blog_details") RequestBody blog_details,
                                              @Part MultipartBody.Part image);
 
-    @Multipart
-    @POST("api/blog_input.php")
-    Call<SubmitBlogResponseModel> submitBlogWithoutImage(@Part("user_name") RequestBody user_name,
-                                             @Part("password") RequestBody password,
-                                             @Part("category") RequestBody category,
-                                             @Part("blog_category") RequestBody blog_category,
-                                             @Part("blog_title") RequestBody blog_title,
-                                             @Part("blog_details") RequestBody blog_details);
-
     @POST("api/onlineinfo.php")
     @FormUrlEncoded
     Call<PaymentSystemListModel> getPaymentSystems (@Field("user_name") String user_name,
@@ -208,4 +199,16 @@ public interface RetroService {
                                                       @Field("category") String category,
                                                       @Field("token") String token,
                                                       @Field("device_id") String device_id);
+
+
+
+
+    @Multipart
+    @POST("api/profile_update.php")
+    Call<SubmitBlogResponseModel> uploadProfileImage(@Part("user_name") RequestBody user_name,
+                                                     @Part("password") RequestBody password,
+                                                     @Part("category") RequestBody category,
+                                                     @Part MultipartBody.Part image);
+
+
 }

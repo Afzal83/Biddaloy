@@ -12,7 +12,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="16dp"
         android:gravity="left"
-        android:textSize="22dp"
+        android:textSize="16dp"
         android:textColor="@color/black"
         android:text="Moni pur High schlool"/>
     <LinearLayout
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Android Studio"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:textColor="@color/black" />
 
     </LinearLayout>

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.dgpro.biddaloy.Helper.Constants;
 import com.dgpro.biddaloy.Model.LoginModel;
 import com.dgpro.biddaloy.Network.Model.AboutInstituteModel;
+import com.dgpro.biddaloy.adapter.UserDrpupdownAdapter;
 import com.dgpro.biddaloy.application.BiddaloyApplication;
 import com.dgpro.biddaloy.Helper.ImageHelper;
 import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
@@ -33,6 +36,10 @@ import com.dgpro.biddaloy.R;
 import com.dgpro.biddaloy.service.DeleteTokenService;
 import com.dgpro.biddaloy.serviceapi.UserApi;
 import com.dgpro.biddaloy.store.AppSharedPreferences;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
@@ -44,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
     UserApi userApi;
     BiddaloyApplication biddaloyApplication;
 
-    String[] SpinnerItem = {"Student","Guardian","Teacher"};
+    String[] SpinnerItem = {"Select User","Student","Guardian","Teacher"};
+    List<String> droupdownList;
+
     private String userCatagory = "";
     private String baseUrl = "";
     private String userName = "";
@@ -66,15 +75,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        droupdownList = Arrays.asList(SpinnerItem);
         Spinner spin = (Spinner) findViewById(R.id.user_spinner);
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,SpinnerItem);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,SpinnerItem);
+        UserDrpupdownAdapter aa = new UserDrpupdownAdapter(this,R.layout.droupdown_blog_catagory,droupdownList);
+        //aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("selected user type ", ""+SpinnerItem[i]);
                 userCatagory = SpinnerItem[i];
+                if(userCatagory.contains("Select")){
+                    userCatagory = "";
+                    return;
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -85,9 +100,11 @@ public class LoginActivity extends AppCompatActivity {
     void startLoginStuffs(){
 
         Boolean isValidCredential = true;
-        baseUrl = ((EditText)(findViewById(R.id.base_url_login))).getText().toString();
-        baseUrl = "http://"+baseUrl+"/";
+//        baseUrl = "demo.101bd.com";//((EditText)(findViewById(R.id.base_url_login))).getText().toString();
+//        userName = "Ashraful";//((EditText)(findViewById(R.id.user_name_login))).getText().toString();
+//        userPass = "123";//((EditText)(findViewById(R.id.password_login))).getText().toString();
 
+        baseUrl = ((EditText)(findViewById(R.id.base_url_login))).getText().toString();
         userName = ((EditText)(findViewById(R.id.user_name_login))).getText().toString();
         userPass = ((EditText)(findViewById(R.id.password_login))).getText().toString();
 
@@ -115,6 +132,8 @@ public class LoginActivity extends AppCompatActivity {
         login();
     }
     void login(){
+
+        baseUrl = "http://"+baseUrl+"/";
 
         LoginModel loginModel = new LoginModel();
         loginModel.setUserName(userName);
@@ -155,8 +174,14 @@ public class LoginActivity extends AppCompatActivity {
                 userApi.saveLoginDataToSharedPreference(getBaseContext(),mModel);
                 saveImage(model.getImage_url());
 
-                startActivity(new Intent(LoginActivity.this,SplashActivity.class));
-                LoginActivity.this.finish();
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(LoginActivity.this,SplashActivity.class));
+                        LoginActivity.this.finish();
+                    }
+                }, 5000);
+
             }
             @Override
             public void onError(String errorMessage) {

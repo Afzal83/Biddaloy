@@ -10,8 +10,7 @@
         android:id="@+id/blog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="15dp"
+        android:textSize="14dp"
         android:text="1st Semester, 2090"/>
 
 </LinearLayout>

@@ -142,6 +142,7 @@ public class StudentAttendenceFragment extends Fragment implements View.OnClickL
             ((LinearLayout)mView.findViewById(R.id.attendence_bar_container)).setVisibility(View.GONE);
             return;
         }
+        ((LinearLayout)mView.findViewById(R.id.attendence_bar_container)).setVisibility(View.VISIBLE);
 
         String sPresent = "Present "+biddaloyApplication.studentPresentDay+" days";
         String sAbsent = "Absent "+biddaloyApplication.studentAbsentDay+" days";
@@ -180,6 +181,7 @@ public class StudentAttendenceFragment extends Fragment implements View.OnClickL
                         biddaloyApplication.attendentList.clear();
                         biddaloyApplication.attendentList.addAll(attendenceDataModels) ;
                         attendencListAdapter.notifyDataSetChanged();
+                        updateView();
                     }
                     @Override
                     public void onError(String errorMsg) {

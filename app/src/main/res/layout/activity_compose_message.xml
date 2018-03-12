@@ -32,13 +32,13 @@
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="40dp">
                 <TextView
                     android:id="@+id/to_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textSize="20dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:text="To : "/>
 
@@ -65,13 +65,13 @@
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="40dp">
                 <TextView
                     android:id="@+id/sub_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textSize="20dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:text="Subject : "/>
                 <EditText
@@ -82,6 +82,7 @@
                     android:layout_centerVertical="true"
                     android:inputType="textNoSuggestions"
                     android:text="Subject "
+                    android:textSize="14dp"
                     android:background="#00000000"/>
                 <View
                     android:layout_width="match_parent"

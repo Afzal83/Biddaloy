@@ -2,9 +2,11 @@ package com.dgpro.biddaloy.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dgpro.biddaloy.Network.Model.BlogDataModel;
 import com.dgpro.biddaloy.activity.ComposeBlogActivity;
 import com.dgpro.biddaloy.activity.WebViewActivity;
@@ -39,7 +42,7 @@ import retrofit2.Response;
  * Created by Babu on 1/27/2018.
  */
 
-public class BlogFragment extends  Fragment implements RecycleViewItemClickListener {
+public class BlogFragment extends  Fragment implements RecycleViewItemClickListener,SwipeRefreshLayout.OnRefreshListener {
 
     BlogApi blogApi;
     TransientDialog tDialog ;
@@ -51,6 +54,8 @@ public class BlogFragment extends  Fragment implements RecycleViewItemClickListe
     String blogUrl = "";
 
     View mView;
+
+    SwipeRefreshLayout swipeLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +71,14 @@ public class BlogFragment extends  Fragment implements RecycleViewItemClickListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_blog,container,false);
 
+        swipeLayout = (SwipeRefreshLayout)mView.findViewById(R.id.blog_swipe_container);
+        swipeLayout.setOnRefreshListener(this);
+//        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
+
+
         FloatingActionButton fab = (FloatingActionButton) mView.findViewById(R.id.fab_create_blog);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +91,24 @@ public class BlogFragment extends  Fragment implements RecycleViewItemClickListe
         getBlogData();
         return mView;
     }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                getBlogData();
+            }
+        }, 2000);
+    }
     void getBlogData(){
-        final android.app.AlertDialog dialog = new SpotsDialog(getActivity());
-        dialog.show();
+
+        final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title(getResources().getString(R.string.loading))
+                .content(getResources().getString(R.string.pleaseWait))
+                .progress(true, 0)
+                .show();
+
         blogApi.downLoadBlogData(new BlogApi.Callback<List<BlogDataModel>>() {
             @Override
             public void onSuccess(List<BlogDataModel> blogDataModels) {
@@ -96,7 +124,7 @@ public class BlogFragment extends  Fragment implements RecycleViewItemClickListe
     }
     void setBlogListView(){
         blogAdapter = new BlogAdapter(biddaloyApplication.blogList,this);
-        blogListView = (RecyclerView)mView. findViewById(R.id.recycler_view_for_result);
+        blogListView = (RecyclerView)mView. findViewById(R.id.recycler_view_for_blog);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         blogListView.setLayoutManager(mLayoutManager);
         blogListView.setItemAnimator(new DefaultItemAnimator());

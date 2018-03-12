@@ -8,6 +8,11 @@
 
 
     <string name="loading">Loading ....</string>
+    <string name="Uploading">UpLoading ....</string>
     <string name="logingIn">Loging In ....</string>
-    <string name="pleaseWait">Please Waing</string>
+    <string name="pleaseWait">Please Wait</string>
+
+
+    <string name="upload_image">Upload Image</string>
+    <string name="change_image">Change Image</string>
 </resources>
