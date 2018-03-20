@@ -2,6 +2,7 @@ package com.dgpro.biddaloy.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +33,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
@@ -81,7 +84,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         uploadImage.setOnClickListener(this);
         changeImage.setOnClickListener(this);
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 103) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 709);
+            }else{
+                Toast.makeText(getActivity(), "Camera Permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -101,8 +115,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     }
     void getCameraImage(){
 
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 709);
+        //Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+       // startActivityForResult(intent, 709);
+
+        String[] permissions = {"android.permission.WRITE_EXTERNAL_STORAGE"};
+        requestPermissions(permissions, 103);
+
+
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -113,10 +132,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 Log.e("requestCode","709");
                 if(data != null)
                 {
-
                     Bundle extras = data.getExtras();
                     Bitmap bitmap = (Bitmap) extras.get("data");
-                    //profileImage.setImageBitmap(bitmap);
+                    profileImage.setImageBitmap(bitmap);
                     uploadImage.setVisibility(View.VISIBLE);
 
                     uploadProfileImage (bitmap);
@@ -130,11 +148,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         bmp.compress(Bitmap.CompressFormat.JPEG,50,stream);
         byte[] byteArray = stream.toByteArray();
 
+        Log.e("image array ", byteArray.toString());
+
 
          //=  File.createTempFile("test", null, getActivity().getCacheDir());//new File(getActivity().getCacheDir(),biddaloyApplication.userName);
         MultipartBody.Part body = null;
         try {
-            File f =  File.createTempFile("test_img", null, getActivity().getCacheDir());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String imageName = timestamp.getTime()+"";
+
+            File f =  File.createTempFile(imageName, null, getActivity().getCacheDir());
 
             //File f = new File(getActivity().getCacheDir(),"test_img");
             if (!f.exists()) {

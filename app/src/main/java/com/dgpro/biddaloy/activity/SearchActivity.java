@@ -180,7 +180,7 @@ public class SearchActivity extends AppCompatActivity implements RecycleViewItem
                             suggestionsList.clear();
                             for(SearchDataModel mOdel:response.body().getSearch_result()){
                                 String str = mOdel.getName();
-                                if(str.isEmpty() || str.equals("")){continue;}
+                                //if(str.isEmpty() || str.equals("")){continue;}
                                 suggestionsList.add(str);
                             }
                             if(suggestoinClicked){

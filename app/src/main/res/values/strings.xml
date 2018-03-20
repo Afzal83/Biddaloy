@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Biddaloy</string>
+    <string name="gmap_key">AIzaSyBg6QllbgNUAzx7DTdje7yXG674Ub9jCpE</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

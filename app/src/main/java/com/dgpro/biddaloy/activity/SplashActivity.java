@@ -90,8 +90,12 @@ public class SplashActivity extends AppCompatActivity {
             if (!token.equals("") || token.isEmpty()) {
                 Log.e("FCM", "Refreshed token uploading ");
 
-                final android.app.AlertDialog dialog = new SpotsDialog(this);
-                dialog.show();
+                final MaterialDialog dialog = new MaterialDialog.Builder(this)
+                        .title(getResources().getString(R.string.loading))
+                        .content(getResources().getString(R.string.pleaseWait))
+                        .progress(true, 0)
+                        .show();
+
                 userApi.sendFcmKey(token,new UserApi.Callback<String>(){
                     @Override
                     public void onSuccess(String s) {

@@ -155,7 +155,13 @@ public class ComposeMessage extends AppCompatActivity implements View.OnClickLis
             public void onSuccess(String s) {
                 dialog.dismiss();
                 transientDialog.showTransientDialogWithOutAction("Success...","Message sent Successfully..");
-                ComposeMessage.this.finish();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        ComposeMessage.this.finish();
+                    }
+                }, 2500);
             }
 
             @Override

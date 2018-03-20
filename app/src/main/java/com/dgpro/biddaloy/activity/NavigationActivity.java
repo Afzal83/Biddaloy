@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dgpro.biddaloy.Helper.Constants;
 import com.dgpro.biddaloy.Model.LoginModel;
@@ -34,6 +35,7 @@ import com.dgpro.biddaloy.fragment.MyStudents.MyStudentFragment;
 import com.dgpro.biddaloy.fragment.NoticeFragment;
 import com.dgpro.biddaloy.fragment.BlogFragment;
 import com.dgpro.biddaloy.fragment.ProfileFragment;
+import com.dgpro.biddaloy.fragment.TrackingFragment;
 import com.dgpro.biddaloy.fragment.settings.SettingsFragment;
 import com.dgpro.biddaloy.serviceapi.UserApi;
 
@@ -77,25 +79,7 @@ public class NavigationActivity extends AppCompatActivity
         // Display the saved image to ImageView
         imgvw.setImageURI(savedImageURI);
 
-
-        String fr = getIntent().getStringExtra("res_fr");
-
-        if(null == fr){
-            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new HomeFragment()).commit();
-        }
-        else if(fr.contains("notice")){
-            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new NoticeFragment()).commit();
-        }
-        else if(fr.contains("message")){
-            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new MessageFragment()).commit();
-        }
-        else if(fr.contains("blog")){
-            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new BlogFragment()).commit();
-        }
-        else{
-            getSupportFragmentManager().beginTransaction().add(R.id.item_container,new HomeFragment()).commit();
-        }
-
+        getSupportFragmentManager().beginTransaction().add(R.id.item_container,new HomeFragment()).commit();
 
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
@@ -141,8 +125,13 @@ public class NavigationActivity extends AppCompatActivity
             setTitle ("Home");
 
         }else if(id == R.id.nav_student){
-            replaceFragment(new MyStudentFragment());
-            setTitle ("My Students");
+            if(biddaloyApplication.userCatagory.contains("eacher")){
+                Toast.makeText(this,"This featue is not implimented for you yet",
+                        Toast.LENGTH_LONG).show();
+            }else{
+                replaceFragment(new MyStudentFragment());
+                setTitle ("My Students");
+            }
         }
         else if (id == R.id.nav_notice) {
             replaceFragment(new NoticeFragment());
@@ -168,6 +157,10 @@ public class NavigationActivity extends AppCompatActivity
         else if (id == R.id.nav_settings) {
             replaceFragment(new SettingsFragment());
             setTitle ("Settings");
+        }
+        else if (id == R.id.nav_tracking) {
+            replaceFragment(new TrackingFragment());
+            setTitle ("Tracking");
         }
         else if (id == R.id.nav_profile) {
             replaceFragment(new ProfileFragment());

@@ -99,9 +99,9 @@ public class LoginActivity extends AppCompatActivity {
     }
     void startLoginStuffs(){
 
-        Boolean isValidCredential = true;
+//        Boolean isValidCredential = true;
 //        baseUrl = "demo.101bd.com";//((EditText)(findViewById(R.id.base_url_login))).getText().toString();
-//        userName = "Ashraful";//((EditText)(findViewById(R.id.user_name_login))).getText().toString();
+//        userName = "Najmun";//"Ashraful";//((EditText)(findViewById(R.id.user_name_login))).getText().toString();
 //        userPass = "123";//((EditText)(findViewById(R.id.password_login))).getText().toString();
 
         baseUrl = ((EditText)(findViewById(R.id.base_url_login))).getText().toString();
