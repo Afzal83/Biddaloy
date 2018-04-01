@@ -61,6 +61,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
     @Override
     public int getItemCount() {
+        if(null == messageList) {return  0 ;}
         return messageList.size();
     }
 }

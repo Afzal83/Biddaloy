@@ -74,8 +74,7 @@ public class AboutUsFragment extends Fragment implements CallFromMessageList {
 
                 ((TextView)mView.findViewById(R.id.about_company_name)).setText(productModels.getCompany_name());
                 ((TextView)mView.findViewById(R.id.aboutus_text)).setText(productModels.getAbout_us());
-
-                setBlogListView();
+                setProductList();
             }
 
             @Override
@@ -86,7 +85,7 @@ public class AboutUsFragment extends Fragment implements CallFromMessageList {
         });
     }
 
-    void setBlogListView(){
+    void setProductList(){
         OurProductAdapter mAdapter = new OurProductAdapter(getActivity(),productList,this);
         RecyclerView productListView = (RecyclerView)mView. findViewById(R.id.productList_recyclerview);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                 userCatagory = SpinnerItem[i];
                 if(userCatagory.contains("Select")){
                     userCatagory = "";
-                    return;
                 }
             }
             @Override
@@ -99,9 +98,8 @@ public class LoginActivity extends AppCompatActivity {
     }
     void startLoginStuffs(){
 
-//        Boolean isValidCredential = true;
 //        baseUrl = "demo.101bd.com";//((EditText)(findViewById(R.id.base_url_login))).getText().toString();
-//        userName = "Najmun";//"Ashraful";//((EditText)(findViewById(R.id.user_name_login))).getText().toString();
+//        userName = "Ashraful";//"Ashraful Najmun";//((EditText)(findViewById(R.id.user_name_login))).getText().toString();
 //        userPass = "123";//((EditText)(findViewById(R.id.password_login))).getText().toString();
 
         baseUrl = ((EditText)(findViewById(R.id.base_url_login))).getText().toString();
@@ -142,8 +140,8 @@ public class LoginActivity extends AppCompatActivity {
         loginModel.setBaseUrl(baseUrl);
 
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .title("Logging In..")
-                .content("Please Wait")
+                .title(getResources().getString(R.string.loading))
+                .content(getResources().getString(R.string.pleaseWait))
                 .progress(true, 0)
                 .show();
 
@@ -151,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(LoginDataModel model) {
-                dialog.dismiss();
+
 
                 Thread thread = new Thread() {
                     @Override
@@ -179,9 +177,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         startActivity(new Intent(LoginActivity.this,SplashActivity.class));
                         LoginActivity.this.finish();
+                        dialog.dismiss();
                     }
-                }, 5000);
-
+                }, 3000);
             }
             @Override
             public void onError(String errorMessage) {
@@ -202,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResourceReady(final Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         Log.e("saving image","saved");
                         ImageHelper imgHelper = new ImageHelper();
-                        String uri = imgHelper.saveToInternalStorage(resource, getApplicationContext(), "attila");
+                        String uri = imgHelper.saveToInternalStorage(resource, getApplicationContext(), userName);
                         AppSharedPreferences.saveStringToSharePreference(getBaseContext(),"user_image_uri",uri);
                         biddaloyApplication.usreImageUrl = uri;
                         Log.e("image_uri"," "+uri);

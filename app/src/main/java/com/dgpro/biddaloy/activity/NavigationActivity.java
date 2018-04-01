@@ -30,6 +30,7 @@ import com.dgpro.biddaloy.application.BiddaloyApplication;
 import com.dgpro.biddaloy.R;
 import com.dgpro.biddaloy.fragment.AboutUsFragment;
 import com.dgpro.biddaloy.fragment.HomeFragment;
+import com.dgpro.biddaloy.fragment.LibraryFragment;
 import com.dgpro.biddaloy.fragment.Message.MessageFragment;
 import com.dgpro.biddaloy.fragment.MyStudents.MyStudentFragment;
 import com.dgpro.biddaloy.fragment.NoticeFragment;
@@ -154,6 +155,11 @@ public class NavigationActivity extends AppCompatActivity
             replaceFragment(new AboutUsFragment());
             setTitle ("About Us");
         }
+        else if(id== R.id.nav_library){
+
+            replaceFragment(new LibraryFragment());
+            setTitle ("Library");
+        }
         else if (id == R.id.nav_settings) {
             replaceFragment(new SettingsFragment());
             setTitle ("Settings");
@@ -170,7 +176,7 @@ public class NavigationActivity extends AppCompatActivity
 
             new UserApi(this).insertLoginModelToSharePreference(getBaseContext(),new LoginModel());
             startActivity(new Intent(this,LandingActivity.class));
-            finish();
+            this.finish();
 
         }
 

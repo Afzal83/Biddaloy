@@ -22,6 +22,9 @@ public class AttendenceModel {
     @SerializedName("present")
     private String present;
 
+    @SerializedName("error")
+    private int error;
+
     @SerializedName("error_report")
     private String error_report;
 
@@ -58,6 +61,14 @@ public class AttendenceModel {
 
     public void setPresent(String present) {
         this.present = present;
+    }
+
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
     }
 
     public String getError_report() {

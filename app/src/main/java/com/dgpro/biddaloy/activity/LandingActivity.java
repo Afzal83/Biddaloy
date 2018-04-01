@@ -43,12 +43,6 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-//        if (getIntent().getExtras() != null) {
-//            Intent intent = new Intent(this,FcmActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-
         biddaloyApplication = ((BiddaloyApplication) this.getApplicationContext());
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 
@@ -95,20 +89,21 @@ public class LandingActivity extends AppCompatActivity {
         Log.e("userName : ",mModel.getUserName());
         Log.e("userPass : ",mModel.getUserPass());
         Log.e("userCatagory : ",mModel.getUserCategory());
-
+        Log.e("baseUrl : ",mModel.getBaseUrl());
 
         if(mModel.getBaseUrl().isEmpty()){
             startActivity(new Intent(this, LoginActivity.class));
-            finish();
+            this.finish();
         }
 
-        if (mModel.getLoggedin()) {
+        else if (mModel.getLoggedin()) {
             Log.e("user logged in","logged in");
             checkUserLoginStatus(mModel);
-        } else {
+        }
+        else {
             Log.e("user is not logged in","not logged in");
             startActivity(new Intent(this, LoginActivity.class));
-            finish();
+            this.finish();
         }
     }
     void checkUserLoginStatus(LoginModel model){
@@ -125,13 +120,13 @@ public class LandingActivity extends AppCompatActivity {
             public void onSuccess(LoginDataModel model) {
                 dialog.dismiss();
                 startActivity(new Intent(LandingActivity.this,SplashActivity.class));
-                finish();
+                LandingActivity.this.finish();
             }
             @Override
             public void onError(String errorMessage) {
                 dialog.dismiss();
                 startActivity(new Intent(LandingActivity.this, LoginActivity.class));
-                finish();
+                LandingActivity.this.finish();
             }
         });
     }

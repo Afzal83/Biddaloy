@@ -11,6 +11,7 @@ import com.dgpro.biddaloy.Network.Model.PaymentDataModel;
 import com.dgpro.biddaloy.Network.Model.ResultDataModel;
 import com.dgpro.biddaloy.Network.Model.RoutineDataModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,14 +37,14 @@ public class BiddaloyApplication extends Application {
         public String usreImageUrl = "" ;
         public String userAddress = "";
 
-        public List<AttendenceDataModel> attendentList;
-        public List<RoutineDataModel> routineList;
-        public List<ResultDataModel> resultList;
-        public List<DiaryDataModel> diaryList;
-        public List<InboxDataModel> inboxList;
-        public List<OutboxDataModel> outBoxList;
-        public List<BlogDataModel> blogList;
-        public List<PaymentDataModel> paymentList ;
+        public List<AttendenceDataModel> attendentList = new ArrayList<>();
+        public List<RoutineDataModel> routineList = new ArrayList<>();
+        public List<ResultDataModel> resultList = new ArrayList<>();
+        public List<DiaryDataModel> diaryList = new ArrayList<>();
+//        public List<InboxDataModel> inboxList = new ArrayList<>();
+//        public List<OutboxDataModel> outBoxList = new ArrayList<>();
+        public List<BlogDataModel> blogList = new ArrayList<>();
+        public List<PaymentDataModel> paymentList = new ArrayList<>() ;
 
         public String studentName = "";
         public String studentRoll = "";

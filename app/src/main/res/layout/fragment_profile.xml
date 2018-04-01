@@ -29,18 +29,6 @@
             android:background="#00000000"
             android:text="@string/upload_image"
             android:visibility="gone"/>
-        <Button
-            android:id="@+id/change_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_margin="10dp"
-            android:textAllCaps="false"
-            android:textColor="#605f5f"
-            android:background="#00000000"
-            android:text="@string/change_image"/>
-
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="Mr asdfasdf asdfasdf"
+            android:layout_marginTop="20dp"
+            android:text="asdfasdf asf "
             android:textSize="25dp"
             android:textColor="#038bb4"/>
         <TextView
@@ -62,9 +50,35 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="user Category: grudian"
+            android:text="asfs asfasdf "
             android:textSize="15dp"
             android:textColor="#038bb4"/>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/change_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textAllCaps="false"
+            android:textColor="#605f5f"
+            android:background="#5bbff9"
+            android:text="@string/change_image"/>
+        <Button
+            android:id="@+id/change_password"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAllCaps="false"
+            android:textColor="#605f5f"
+            android:background="#5bbff9"
+            android:text="@string/change_pass"/>
     </LinearLayout>
 </LinearLayout>

@@ -40,7 +40,10 @@ import com.dgpro.biddaloy.application.BiddaloyApplication;
 import com.dgpro.biddaloy.dialog.TransientDialog;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +70,8 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
     Button uploadImage,discardImage;
     EditText blogTitle_et,blogBody_et;
     ImageView blogImage_iv ;
+
+    File bmpFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,9 +216,14 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
         RequestBody requestFile;
         MultipartBody.Part body = null;
         if(!imageAbsolutePath.contentEquals("")){
-            file = new File(imageAbsolutePath);
-            requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+//            file = new File(imageAbsolutePath);
+//            requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//            body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+            requestFile = RequestBody.create(MediaType.parse("image/*"), bmpFile);
+            body = MultipartBody.Part.createFormData("image", bmpFile.getName(), requestFile);
+
         }
         //Log.e("multipartBody :",body.toString());
 
@@ -323,8 +333,31 @@ public class ComposeBlogActivity extends AppCompatActivity implements View.OnCli
                 Log.e("received imageUriStr ",""+imageUriStr);
                 Log.e("received absoluteUrl ",""+imageAbsolutePath);
 
-                Bitmap bmp = decodeSampledBitmapFromResource(imageAbsolutePath,100,100);
+                Bitmap bmp = BitmapFactory.decodeFile(imageAbsolutePath);//decodeSampledBitmapFromResource(imageAbsolutePath,250,250);
                 blogImage_iv.setImageBitmap(bmp);
+
+                try{
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String imageName = timestamp.getTime()+"";
+                    bmpFile = new File(this.getCacheDir(), imageName);
+                    bmpFile.createNewFile();
+
+                    //Convert bitmap to byte array
+                    Bitmap bTemp = bmp ;
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    bTemp.compress(Bitmap.CompressFormat.JPEG, 75 /*ignored for PNG*/, bos);
+                    byte[] bitmapdata = bos.toByteArray();
+
+                    //write the bytes in file
+                    FileOutputStream fos = new FileOutputStream(bmpFile);
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         }else {
 

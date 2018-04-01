@@ -53,8 +53,8 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
         String payment = mModel.getPaid_amount() + " Taka";
 
         holder.date.setText(mModel.getDate());
-        holder.paidAmount.setText(due);
-        holder.dueAmount.setText(payment);
+        holder.paidAmount.setText(payment);
+        holder.dueAmount.setText(due);
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -66,6 +66,7 @@ public class PaymentListAdapter extends RecyclerView.Adapter<PaymentListAdapter.
 
     @Override
     public int getItemCount() {
+        if (null == paymentList){return  0;}
         return paymentList.size();
     }
 }

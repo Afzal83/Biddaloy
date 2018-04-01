@@ -36,30 +36,35 @@
 
     <group android:id="@+id/grp5" android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_biddaloy"
-            android:icon="@drawable/drawer_aboutus_icon"
-            android:title="About Us" />
+            android:id="@+id/nav_library"
+            android:icon="@drawable/nav_library"
+            android:title="Library" />
     </group>
-
     <group android:id="@+id/grp6" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_tracking"
+            android:icon="@drawable/nav_tracking"
+            android:title="Tracking" />
+    </group>
+    <group android:id="@+id/grp7" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/nav_profile"
+            android:title="Profile" />
+    </group>
+    <group android:id="@+id/grp8" android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/drawer_settings_icon"
             android:title="Settings" />
     </group>
-    <group android:id="@+id/grp7" android:checkableBehavior="single" >
-        <item
-            android:id="@+id/nav_tracking"
-            android:icon="@drawable/drawer_signout_icon"
-            android:title="Tracking" />
-    </group>
-    <group android:id="@+id/grp8" android:checkableBehavior="single" >
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/drawer_signout_icon"
-            android:title="Profile" />
-    </group>
     <group android:id="@+id/grp9" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_biddaloy"
+            android:icon="@drawable/drawer_aboutus_icon"
+            android:title="About Us" />
+    </group>
+    <group android:id="@+id/grp10" android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/drawer_signout_icon"

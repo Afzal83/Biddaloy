@@ -2,7 +2,7 @@ package com.dgpro.biddaloy.Network.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
+/*
  * Created by Babu on 1/13/2018.
  */
 

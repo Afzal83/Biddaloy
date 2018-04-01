@@ -26,7 +26,7 @@ public class ImageHelper {
 
         ContextWrapper wrapper = new ContextWrapper(context);
         File file = wrapper.getDir("Images",MODE_PRIVATE);
-        file = new File(file, "user"+".png");
+        file = new File(file, name+".png");
 
         try{
             OutputStream stream = null;
@@ -39,7 +39,6 @@ public class ImageHelper {
         {
             e.printStackTrace();
         }
-        Uri savedImageURI = Uri.parse(file.getAbsolutePath());
         return file.getAbsolutePath();
     }
 

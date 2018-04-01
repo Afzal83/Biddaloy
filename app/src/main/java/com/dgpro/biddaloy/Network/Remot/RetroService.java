@@ -9,10 +9,12 @@ import com.dgpro.biddaloy.Network.Model.DiaryModel;
 import com.dgpro.biddaloy.Network.Model.DueModel;
 import com.dgpro.biddaloy.Network.Model.FcmSubmitResponseMedel;
 import com.dgpro.biddaloy.Network.Model.InboxModel;
+import com.dgpro.biddaloy.Network.Model.LibraryListModel;
 import com.dgpro.biddaloy.Network.Model.LoginDataModel;
 import com.dgpro.biddaloy.Network.Model.MailDetailsModel;
 import com.dgpro.biddaloy.Network.Model.NoticeModel;
 import com.dgpro.biddaloy.Network.Model.OutboxModel;
+import com.dgpro.biddaloy.Network.Model.PasswordModel;
 import com.dgpro.biddaloy.Network.Model.PaymentListModel;
 import com.dgpro.biddaloy.Network.Model.PaymentSubmitResponseModel;
 import com.dgpro.biddaloy.Network.Model.PaymentSystemListModel;
@@ -51,7 +53,8 @@ public interface RetroService {
                                             @Field("category") String category,
                                             @Field("month") String month,
                                             @Field("year") String year,
-                                            @Field("student_id") String student_id);
+                                            @Field("student_id") String student_id,
+                                            @Field("limit") String limit);
 
     @POST("api/notice.php")
     @FormUrlEncoded
@@ -179,6 +182,13 @@ public interface RetroService {
                                                     @Field("comment") String comment);
 
 
+    @POST("api/library.php")
+    @FormUrlEncoded
+    Call<LibraryListModel> downLoadLibrary(@Field("user_name") String user_name,
+                                           @Field("password") String password,
+                                           @Field("category") String category,
+                                           @Field("limit") String limit);
+
 
     @POST("api/search.php")
     @FormUrlEncoded
@@ -210,5 +220,12 @@ public interface RetroService {
                                                      @Part("category") RequestBody category,
                                                      @Part MultipartBody.Part image);
 
-
+    @POST("api/password.php")
+    @FormUrlEncoded
+    Call<PasswordModel> changePassword(@Field("user_name") String user_name,
+                                       @Field("password") String password,
+                                       @Field("category") String category,
+                                       @Field("old_password") String old_password,
+                                       @Field("new_password") String new_password,
+                                       @Field("again_password") String again_password);
 }

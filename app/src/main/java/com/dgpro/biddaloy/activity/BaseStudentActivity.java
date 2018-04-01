@@ -1,7 +1,6 @@
 package com.dgpro.biddaloy.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,21 +11,11 @@ import com.dgpro.biddaloy.Network.Model.DueModel;
 import com.dgpro.biddaloy.Network.Model.ResultDataModel;
 import com.dgpro.biddaloy.Network.Model.RoutineDataModel;
 import com.dgpro.biddaloy.application.BiddaloyApplication;
-import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
-import com.dgpro.biddaloy.Network.Model.AttendenceModel;
-import com.dgpro.biddaloy.Network.Model.DiaryModel;
 import com.dgpro.biddaloy.Network.Model.PaymentDataModel;
-import com.dgpro.biddaloy.Network.Model.PaymentListModel;
-import com.dgpro.biddaloy.Network.Model.ResultListModel;
-import com.dgpro.biddaloy.Network.Model.RoutineListModel;
-import com.dgpro.biddaloy.Network.Remot.RetroService;
 import com.dgpro.biddaloy.serviceapi.StudentApi;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public abstract class BaseStudentActivity extends AppCompatActivity {
 
@@ -40,6 +29,7 @@ public abstract class BaseStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         biddaloyApplication = ((BiddaloyApplication)this.getApplicationContext());
         studentApi = new StudentApi(this);
+        clearMemory();
     }
 
     void downLoadFromNetwork(){

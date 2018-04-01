@@ -58,6 +58,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
+        if(null == resultList){return  0;}
         return resultList.size();
     }
 }

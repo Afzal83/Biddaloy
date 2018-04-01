@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Biddaloy</string>
-    <string name="gmap_key">AIzaSyBg6QllbgNUAzx7DTdje7yXG674Ub9jCpE</string>
+    <string name="gmap_key">AIzaSyCrkC5mahI4xOHp5t94tjE2ZQAbcRH1Uig</string>
+    <string name="gmap_debug_key">AIzaSyAlaGnBqpJKRPiHJZzkINN6q6ycMzqxIf0</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -17,4 +18,9 @@
 
     <string name="upload_image">Upload Image</string>
     <string name="change_image">Change Image</string>
+    <string name="change_pass">Change Password</string>
+
+    <string name="action_ok">Ok</string>
+    <string name = "permission_alert_dialog_title">SMS Permission</string>
+    <string name = "permission_dialog_message">This permission is Required in order to show your assets location </string>
 </resources>

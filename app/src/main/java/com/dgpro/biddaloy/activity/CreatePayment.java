@@ -1,5 +1,6 @@
 package com.dgpro.biddaloy.activity;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -166,7 +167,14 @@ public class CreatePayment extends AppCompatActivity {
                         dialog.dismiss();
                         transientDialog.showTransientDialogWithOutAction("Success"
                                 ,"Payment Submitted Successfully");
-                        CreatePayment.this.finish();
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                CreatePayment.this.finish();
+                            }
+                        }, 2500);
+
                     }else{
                         dialog.dismiss();
                         int statusCode = response.code();

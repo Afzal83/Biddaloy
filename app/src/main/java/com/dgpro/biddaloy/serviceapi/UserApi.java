@@ -11,6 +11,7 @@ import com.dgpro.biddaloy.Model.LoginModel;
 import com.dgpro.biddaloy.Network.ApiUtil.ApiUtils;
 import com.dgpro.biddaloy.Network.Model.FcmSubmitResponseMedel;
 import com.dgpro.biddaloy.Network.Model.LoginDataModel;
+import com.dgpro.biddaloy.Network.Model.PasswordModel;
 import com.dgpro.biddaloy.Network.Remot.RetroService;
 import com.dgpro.biddaloy.activity.LandingActivity;
 import com.dgpro.biddaloy.activity.LoginActivity;
@@ -28,15 +29,14 @@ import retrofit2.Response;
 
 public class UserApi {
 
-    BiddaloyApplication biddaloyApplication;
-    Context mContext;
+    private BiddaloyApplication biddaloyApplication;
+    private Context mContext;
     public UserApi(Context mContext){
         this.mContext = mContext;
         biddaloyApplication = ((BiddaloyApplication)mContext.getApplicationContext());
     }
 
     public void doLogin(final LoginModel loginInPut,final Callback<LoginDataModel> callback){
-
 
 
         Log.e("test","I am working ");
@@ -56,20 +56,23 @@ public class UserApi {
             public void onResponse(Call<LoginDataModel> call, Response<LoginDataModel> response) {
                 if(response.isSuccessful()) {
                     if(response.body().getError() == 1){
+                        Log.e("login","network error = 1");
                         callback.onError(response.body().getError_report());
                     }else{
-                        Log.e("login:user: ","problem here");
                         Log.e("login:user: ",response.body().getName());
                         Log.e("login:user: ",response.body().getImage_url());
 
                         callback.onSuccess(response.body());
                     }
                 }else {
+                    int statusCode  = response.code();
+                    Log.e("login","error code : "+statusCode);
                     callback.onError("Error to Log in...");
                 }
             }
             @Override
             public void onFailure(Call<LoginDataModel> call, Throwable t) {
+                Log.e("login","network error");
                 callback.onError("Error");
             }
         });
@@ -142,6 +145,35 @@ public class UserApi {
             @Override
             public void onFailure(Call<FcmSubmitResponseMedel> call, Throwable t) {
                 callback.onError("error");
+            }
+        });
+    }
+    public void changeUserPassword(String newPass, String confirmNewPass, final Callback<String> callback){
+        RetroService mService = ApiUtils.getLoginDataService(biddaloyApplication.baseUrl);
+        mService.changePassword(
+                biddaloyApplication.userName
+                ,biddaloyApplication.password
+                ,biddaloyApplication.userCatagory
+                ,biddaloyApplication.password
+                ,newPass
+                ,confirmNewPass
+        ).enqueue(new retrofit2.Callback<PasswordModel>() {
+
+            @Override
+            public void onResponse(Call<PasswordModel> call, Response<PasswordModel> response) {
+                if(response.isSuccessful()) {
+                    if(response.body().getError() == 0){
+                        callback.onSuccess(response.body().getError_report());
+                    }else{
+                        callback.onError(response.body().getError_report());
+                    }
+                }else {
+                    callback.onError(response.body().getError_report());
+                }
+            }
+            @Override
+            public void onFailure(Call<PasswordModel> call, Throwable t) {
+                callback.onError("Network error");
             }
         });
     }
